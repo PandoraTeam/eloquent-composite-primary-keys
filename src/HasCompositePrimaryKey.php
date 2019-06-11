@@ -1,5 +1,5 @@
 <?php
-namespace CoenJacobs\EloquentCompositePrimaryKeys;
+namespace PandoraTeam\EloquentCompositePrimaryKeys;
 
 use Illuminate\Database\Eloquent\Builder;
 
