@@ -1,0 +1,23 @@
+{
+	"name": "pandora-team/eloquent-composite-primary-keys",
+	"description": "Provides composite primary key support for Eloquent ORM ",
+	"keywords": ["Eloquent", "Composite primary keys"],
+	"homepage": "https://github.com/PandoraTeam/eloquent-composite-primary-keys",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Petr Gostin",
+			"email": "nescafe238@gmail.com",
+			"homepage": "http://u-238.ru",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"illuminate/database": "~5.5"
+	},
+	"autoload": {
+		"psr-4": {
+			"PandoraTeam\\EloquentCompositePrimaryKeys\\": "src/"
+		}
+	}
+}
