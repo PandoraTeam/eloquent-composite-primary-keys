@@ -14,41 +14,39 @@ trait HasCompositePrimaryKey {
 		return false;
 	}
 
-	/**
+	    /**
 	 * Set the keys for a save update query.
 	 *
-	 * @param Builder $query
+	 * @param  Builder $query
+	 *
 	 * @return Builder
+	 * @throws Exception
 	 */
 	protected function setKeysForSaveQuery(Builder $query) {
-		$keys = $this->getKeyName();
-		if (!is_array($keys)) {
-			return parent::setKeysForSaveQuery($query);
+		foreach ($this->getKeyName() as $key) {
+			if (!isset($this->$key)) {
+				throw new Exception(__METHOD__ . 'Missing part of the primary key: ' . $key);
+			}
+			$query->where($key, '=', $this->$key);
 		}
-
-		foreach ($keys as $keyName) {
-			$query->where($keyName, '=', $this->getKeyForSaveQuery($keyName));
-		}
-
 		return $query;
 	}
 
 	/**
-	 * Get the primary key value for a save query.
+	 * Execute a query for a single record by ID.
 	 *
-	 * @param mixed $keyName
-	 * @return mixed
+	 * @param  array $ids Array of keys, like [column => value].
+	 * @param  array $columns
+	 *
+	 * @return mixed|static
 	 */
-	protected function getKeyForSaveQuery($keyName = null) {
-		if (is_null($keyName)) {
-			$keyName = $this->getKeyName();
+	public static function find($ids, $columns = ['*']) {
+		$me    = new self;
+		$query = $me->newQuery();
+		foreach ($me->getKeyName() as $key) {
+			$query->where($key, '=', $ids[$key]);
 		}
-
-		if (isset($this->original[$keyName])) {
-			return $this->original[$keyName];
-		}
-
-		return $this->getAttribute($keyName);
+		return $query->first($columns);
 	}
 
 }
