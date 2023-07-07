@@ -20,12 +20,12 @@ trait HasCompositePrimaryKey {
 	 * @param  Builder $query
 	 *
 	 * @return Builder
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function setKeysForSaveQuery(Builder $query) {
 		foreach ($this->getKeyName() as $key) {
 			if (!isset($this->$key)) {
-				throw new Exception(__METHOD__ . 'Missing part of the primary key: ' . $key);
+				throw new \Exception(__METHOD__ . 'Missing part of the primary key: ' . $key);
 			}
 			$query->where($key, '=', $this->$key);
 		}
