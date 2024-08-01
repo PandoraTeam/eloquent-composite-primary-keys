@@ -14,7 +14,7 @@ trait HasCompositePrimaryKey {
 		return false;
 	}
 
-	    /**
+	/**
 	 * Set the keys for a save update query.
 	 *
 	 * @param  Builder $query
